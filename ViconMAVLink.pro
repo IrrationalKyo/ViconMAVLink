@@ -37,6 +37,9 @@ SOURCES += main.cpp\
 HEADERS  += \
     lib/MAVLink2/common/common.h \
     lib/MAVLink2/common/mavlink.h \
+    /usr/local/include/Vicon/DataStreamClient.h \
+    /usr/local/include/Vicon/DataStreamRetimingClient.h \
+    /usr/local/include/Vicon/IDataStreamClientBase.h \
     Drone.h \
     KalmanFilter.h \
     Sender.h \
@@ -50,20 +53,33 @@ FORMS    += \
     StationWindow.ui \
     SenderWindow.ui
 
-unix:!macx: LIBS += -L$$PWD/../../../../usr/local/lib/Vicon/ -lViconDataStreamSDK_CPP
-unix:!macx: LIBS += -L$$PWD/../../../../usr/local/lib/Vicon/ -lboost_system
-unix:!macx: LIBS += -L$$PWD/../../../../usr/local/lib/Vicon/ -lboost_thread
+#unix:!macx: LIBS += -L$$PWD/../../../../usr/local/lib/Vicon/ -lViconDataStreamSDK_CPP
+#unix:!macx: LIBS += -L$$PWD/../../../../usr/local/lib/Vicon/ -lboost_system
+#unix:!macx: LIBS += -L$$PWD/../../../../usr/local/lib/Vicon/ -lboost_thread
 
-INCLUDEPATH += $$PWD/../../../../usr/local/include/Vicon
-DEPENDPATH += $$PWD/../../../../usr/local/include/Vicon
+# Kyo Kim: modified the path
+
+unix {
+    LIBS += -L/usr/local/lib/Vicon/ -lViconDataStreamSDK_CPP
+    LIBS += -L/usr/local/lib/Vicon/ -lboost_system
+    LIBS += -L/usr/local/lib/Vicon/ -lboost_thread
+}
+
+
+INCLUDEPATH += /usr/local/include/Vicon/
+DEPENDPATH += /usr/local/include/Vicon/
 
 unix:!macx: LIBS += -L$$PWD/../../../../usr/local/lib/GeographicLib/ -lGeographic
 
-INCLUDEPATH += $$PWD/../../../../usr/local/include
-DEPENDPATH += $$PWD/../../../../usr/local/include
+#INCLUDEPATH += $$PWD/../../../../usr/local/include
+#DEPENDPATH += $$PWD/../../../../usr/local/include
+INCLUDEPATH += /usr/local/include
+DEPENDPATH += /usr/local/include
 
-INCLUDEPATH += $$PWD/../../../../../include/
-DEPENDPATH += $$PWD/../../../../../include/
+#INCLUDEPATH += $$PWD/../../../../../include/
+#DEPENDPATH += $$PWD/../../../../../include/
+INCLUDEPATH += /include/
+DEPENDPATH += /include/
 
 DEFINES += GEOGRAPHICLIB_SHARED_LIB=0
 

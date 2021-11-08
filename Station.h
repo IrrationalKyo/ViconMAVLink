@@ -28,7 +28,7 @@
 #include <QHostAddress>
 #include <QMap>
 #include <QList>
-#include "DataStreamClient.h"
+#include "/usr/local/include/Vicon/DataStreamClient.h"
 #include <iostream>
 #include "Drone.h"
 #include <QReadWriteLock>
